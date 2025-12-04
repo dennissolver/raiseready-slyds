@@ -84,7 +84,7 @@ export function useAuth(options: AuthOptions = {}) {
     if (superadmin) return 'superadmin';
 
     // Check user_roles table for slyds_admin
-    const { data: userRoleData } = await supabase
+    const { data: userRoleData } = await (supabase as any)
       .from('user_roles')
       .select('role')
       .eq('user_id', userId)

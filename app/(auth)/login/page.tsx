@@ -12,7 +12,7 @@ export default function LoginPage() {
 
   const getUserRole = async (userId: string): Promise<string> => {
     // Check user_roles table first (for slyds_admin)
-    const { data: roleData, error: roleError } = await supabase
+    const { data: roleData, error: roleError } = await (supabase as any)
       .from('user_roles')
       .select('role')
       .eq('user_id', userId)
