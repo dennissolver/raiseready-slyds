@@ -98,7 +98,7 @@ export default function AdminDashboard() {  // ✅ Fixed: Capitalized component 
 
       // Get latest metrics
       const { data: latestMetrics } = await supabase
-        .from('system_metrics')
+        .from('system_metrics' as any)
         .select('*')
         .order('metric_date', { ascending: false })
         .limit(1)
