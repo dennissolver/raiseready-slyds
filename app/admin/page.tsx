@@ -97,7 +97,7 @@ export default function AdminDashboard() {  // ✅ Fixed: Capitalized component 
       setIsLoading(true);
 
       // Get latest metrics
-      const { data: latestMetrics } = await supabase
+      const { data: latestMetrics }: { data: any } = await supabase
         .from('system_metrics' as any)
         .select('*')
         .order('metric_date', { ascending: false })
@@ -370,4 +370,5 @@ export default function AdminDashboard() {  // ✅ Fixed: Capitalized component 
     </div>
   );
 }
+
 
