@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 
+type UserRole = 'founder' | 'slyds_admin' | 'superadmin';
+
 interface AuthOptions {
   requireAuth?: boolean;
-  requiredRole?: 'founder' | 'investor' | 'superadmin';
+  requiredRole?: UserRole;
   redirectTo?: string;
 }
 
@@ -18,7 +20,7 @@ export function useAuth(options: AuthOptions = {}) {
 
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
-  const [userRole, setUserRole] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<UserRole | null>(null);
   const router = useRouter();
 
   const supabase = createClient();
@@ -50,8 +52,8 @@ export function useAuth(options: AuthOptions = {}) {
 
         // Check if user has required role
         if (role !== requiredRole && role !== 'superadmin') {
-          // Redirect to appropriate dashboard
-          if (role === 'investor') {
+          // Redirect to appropriate dashboard based on actual role
+          if (role === 'slyds_admin') {
             router.push('/slyds/dashboard');
           } else {
             router.push('/founder/dashboard');
@@ -70,41 +72,36 @@ export function useAuth(options: AuthOptions = {}) {
     }
   };
 
-  const getUserRole = async (userId: string): Promise<'founder' | 'investor' | 'superadmin'> => {
+  const getUserRole = async (userId: string): Promise<UserRole> => {
     // Check superadmin first
     const { data: superadmin } = await supabase
       .from('superadmins')
       .select('id')
       .eq('id', userId)
       .eq('is_active', true)
-      .maybeSingle(); // Changed from .single() to .maybeSingle() to avoid errors
+      .maybeSingle();
 
     if (superadmin) return 'superadmin';
+
+    // Check user_roles table for slyds_admin
+    const { data: userRoleData } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', userId)
+      .maybeSingle();
+
+    if (userRoleData?.role === 'slyds_admin') return 'slyds_admin';
 
     // Check founders table
     const { data: founder } = await supabase
       .from('founders')
-      .select('user_role')
-      .eq('id', userId)
-      .maybeSingle(); // Changed from .single()
-
-    if (founder?.user_role) {
-      const role = founder.user_role;
-      if (role === 'founder' || role === 'investor' || role === 'superadmin') {
-        return role;
-      }
-    }
-
-    // Check investor_profiles
-    const { data: investor } = await supabase
-      .from('investor_profiles')
       .select('id')
       .eq('id', userId)
-      .maybeSingle(); // Changed from .single()
+      .maybeSingle();
 
-    if (investor) return 'investor';
+    if (founder) return 'founder';
 
-    // Default to founder
+    // Default to founder (new signups)
     return 'founder';
   };
 
