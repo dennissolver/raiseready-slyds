@@ -148,7 +148,7 @@ export default function SuperadminSettingsPage() {
         if (error) throw error;
 
         // Log the change
-        await supabase.from('admin_audit_log').insert({
+        await supabase.from('admin_audit_log' as any).insert({
           admin_id: user?.id,
           action_type: 'update',
           resource_type: 'setting',
@@ -331,4 +331,5 @@ export default function SuperadminSettingsPage() {
     </div>
   );
 }
+
 
