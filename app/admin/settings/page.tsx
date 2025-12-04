@@ -86,7 +86,7 @@ export default function SuperadminSettingsPage() {
       setIsLoading(true);
 
       const { data, error } = await supabase
-        .from('global_settings')
+        .from('global_settings' as any)
         .select('*')
         .order('category', { ascending: true })
         .order('setting_key', { ascending: true });
@@ -137,7 +137,7 @@ export default function SuperadminSettingsPage() {
 
       for (const setting of settingsToUpdate) {
         const { error } = await supabase
-          .from('global_settings')
+          .from('global_settings' as any)
           .update({
             setting_value: JSON.stringify(setting.setting_value),
             last_updated_by: user?.id,
