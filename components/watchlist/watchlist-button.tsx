@@ -8,8 +8,8 @@ import { useToast } from '@/hooks/use-toast';
 
 interface WatchlistButtonProps {
   targetId: string;
-  targetType: 'project' | 'investor';
-  userRole: 'founder' | 'investor';
+  targetType: 'project' | 'founder';
+  userRole?: 'founder' | 'slyds_admin';
   variant?: 'default' | 'outline' | 'ghost';
   size?: 'default' | 'sm' | 'lg' | 'icon';
   showLabel?: boolean;
@@ -33,17 +33,8 @@ export function WatchlistButton({
 
   // Get context-aware button text
   const getButtonText = () => {
-    if (userRole === 'investor' && targetType === 'project') {
-      return isWatched ? 'Saved' : 'Save Project';
-    }
-    if (userRole === 'founder' && targetType === 'investor') {
-      return isWatched ? 'Following' : 'Follow';
-    }
-    if (userRole === 'founder' && targetType === 'project') {
-      return isWatched ? 'Following' : 'Follow Project';
-    }
-    if (userRole === 'investor' && targetType === 'investor') {
-      return isWatched ? 'Following' : 'Follow Investor';
+    if (userRole === 'slyds_admin') {
+      return isWatched ? 'Shortlisted' : 'Add to Shortlist';
     }
     return isWatched ? 'Saved' : 'Save';
   };
@@ -66,36 +57,13 @@ export function WatchlistButton({
       let data = null;
       let error = null;
 
-      if (userRole === 'investor' && targetType === 'project') {
-        // Check investor_watchlist
+      if (userRole === 'slyds_admin') {
+        // Check investor_watchlist (Slyds shortlist)
         const result = await supabase
           .from('investor_watchlist')
           .select('id')
           .eq('investor_id', user.id)
           .eq('founder_id', targetId)
-          .single();
-
-        data = result.data;
-        error = result.error;
-      } else if (userRole === 'founder') {
-        // Check founder_watchlist
-        const result = await supabase
-          .from('founder_watchlist')
-          .select('id')
-          .eq('founder_id', user.id)
-          .eq('target_type', targetType)
-          .eq('target_id', targetId)
-          .single();
-
-        data = result.data;
-        error = result.error;
-      } else if (userRole === 'investor' && targetType === 'investor') {
-        // Check investor_network_watchlist
-        const result = await supabase
-          .from('investor_network_watchlist')
-          .select('id')
-          .eq('investor_id', user.id)
-          .eq('target_investor_id', targetId)
           .single();
 
         data = result.data;
@@ -123,17 +91,15 @@ export function WatchlistButton({
       if (!user) {
         toast({
           title: 'Authentication required',
-          description: 'Please sign in to use the watchlist feature.',
+          description: 'Please sign in to use this feature.',
           variant: 'destructive',
         });
         return;
       }
 
       if (isWatched) {
-        // Remove from watchlist
         await removeFromWatchlist(user.id);
       } else {
-        // Add to watchlist
         await addToWatchlist(user.id);
       }
 
@@ -145,17 +111,17 @@ export function WatchlistButton({
       }
 
       toast({
-        title: newStatus ? 'Added to watchlist' : 'Removed from watchlist',
+        title: newStatus ? 'Added to shortlist' : 'Removed from shortlist',
         description: newStatus
-          ? `You'll receive alerts about updates.`
-          : 'You will no longer receive alerts.',
+          ? `Founder added to your shortlist.`
+          : 'Founder removed from shortlist.',
       });
 
     } catch (error) {
       console.error('Error toggling watchlist:', error);
       toast({
         title: 'Error',
-        description: 'Failed to update watchlist. Please try again.',
+        description: 'Failed to update. Please try again.',
         variant: 'destructive',
       });
     } finally {
@@ -164,7 +130,7 @@ export function WatchlistButton({
   };
 
   const addToWatchlist = async (userId: string) => {
-    if (userRole === 'investor' && targetType === 'project') {
+    if (userRole === 'slyds_admin') {
       const { error } = await supabase
         .from('investor_watchlist')
         .insert({
@@ -174,54 +140,16 @@ export function WatchlistButton({
         });
 
       if (error) throw error;
-    } else if (userRole === 'founder') {
-      const { error } = await supabase
-        .from('founder_watchlist')
-        .insert({
-          founder_id: userId,
-          target_type: targetType,
-          target_id: targetId,
-          added_at: new Date().toISOString(),
-        });
-
-      if (error) throw error;
-    } else if (userRole === 'investor' && targetType === 'investor') {
-      const { error } = await supabase
-        .from('investor_network_watchlist')
-        .insert({
-          investor_id: userId,
-          target_investor_id: targetId,
-          added_at: new Date().toISOString(),
-        });
-
-      if (error) throw error;
     }
   };
 
   const removeFromWatchlist = async (userId: string) => {
-    if (userRole === 'investor' && targetType === 'project') {
+    if (userRole === 'slyds_admin') {
       const { error } = await supabase
         .from('investor_watchlist')
         .delete()
         .eq('investor_id', userId)
         .eq('founder_id', targetId);
-
-      if (error) throw error;
-    } else if (userRole === 'founder') {
-      const { error } = await supabase
-        .from('founder_watchlist')
-        .delete()
-        .eq('founder_id', userId)
-        .eq('target_type', targetType)
-        .eq('target_id', targetId);
-
-      if (error) throw error;
-    } else if (userRole === 'investor' && targetType === 'investor') {
-      const { error } = await supabase
-        .from('investor_network_watchlist')
-        .delete()
-        .eq('investor_id', userId)
-        .eq('target_investor_id', targetId);
 
       if (error) throw error;
     }
