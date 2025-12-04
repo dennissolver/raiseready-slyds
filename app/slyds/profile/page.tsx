@@ -30,7 +30,7 @@ export default function InvestorProfilePage() {
 
   const { isLoading: authLoading, user } = useAuth({
     requireAuth: true,
-    requiredRole: 'investor',
+    requiredRole: 'slyds_admin',
   });
 
   // Profile state
