@@ -111,7 +111,7 @@ export default function SuperadminUsersPage() {
 
       if (foundersError) throw foundersError;
 
-      setUsers((foundersData as User[]) || []);
+      setUsers((foundersData as unknown as User[]) || []);
     } catch (error) {
       console.error('Error loading users:', error);
     } finally {
