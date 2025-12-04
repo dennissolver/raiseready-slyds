@@ -7,39 +7,31 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
           {/* Company Info */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">RaiseReady Impact</h3>
+            <h3 className="text-white font-bold text-lg mb-4">SlydS</h3>
             <p className="text-sm text-gray-400 mb-4">
-              Connecting impact investors with social enterprises and sustainable projects.
+              Want to be the next UNICORN? Become a STORYTELLER.
+            </p>
+            <p className="text-sm text-gray-400 mb-4">
+              $2B+ raised for 500+ startups since 2013.
             </p>
             <p className="text-sm text-gray-500">
-              Corporate AI Solutions Pty Ltd<br />
-              Brisbane, Queensland, Australia
+              SlydS - Decks, Fundraise & Strategy<br />
+              Bengaluru, Karnataka, India
             </p>
           </div>
 
-          {/* Product */}
+          {/* Platform */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Product</h4>
+            <h4 className="text-white font-semibold mb-4">Platform</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/features" className="hover:text-white transition-colors">Features</Link></li>
-              <li><Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
-              <li><Link href="/sdg-calculator" className="hover:text-white transition-colors">SDG Calculator</Link></li>
-              <li><Link href="/how-it-works" className="hover:text-white transition-colors">How It Works</Link></li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Company</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-              <li><a href="https://www.global-buildtech.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Global Buildtech</a></li>
-              <li><a href="https://www.corporate-ai-solutions.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Corporate AI Solutions</a></li>
+              <li><Link href="/founder/upload" className="hover:text-white transition-colors">Submit Your Pitch</Link></li>
+              <li><Link href="/founder/practice" className="hover:text-white transition-colors">AI Pitch Coach</Link></li>
+              <li><a href="https://slyds.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">SlydS Services</a></li>
+              <li><a href="https://www.linkedin.com/company/slyds" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a></li>
             </ul>
           </div>
 
@@ -58,13 +50,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@raisereadyimpact.com" className="hover:text-white transition-colors">
-                  Support
-                </a>
-              </li>
-              <li>
-                <a href="mailto:privacy@corporateaisolutions.com" className="hover:text-white transition-colors">
-                  Privacy Inquiries
+                <a href="mailto:hello@slyds.com" className="hover:text-white transition-colors">
+                  Contact Us
                 </a>
               </li>
             </ul>
@@ -75,7 +62,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-500 mb-4 md:mb-0">
-              © {currentYear} Corporate AI Solutions Pty Ltd. All rights reserved.
+              © {currentYear} SlydS Services Pvt. Ltd. All rights reserved.
             </p>
 
             <div className="flex items-center space-x-6 text-sm">
@@ -85,7 +72,7 @@ export default function Footer() {
               <Link href="/terms" className="hover:text-white transition-colors">
                 Terms
               </Link>
-              <a href="mailto:dennis@corporateaisolutions.com" className="hover:text-white transition-colors">
+              <a href="mailto:hello@slyds.com" className="hover:text-white transition-colors">
                 Contact
               </a>
             </div>
@@ -105,21 +92,14 @@ export default function Footer() {
                 <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                AU Privacy Act
+                India DPDP Act
               </span>
               <span className="text-gray-700">•</span>
               <span className="flex items-center gap-1">
                 <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                SOC 2 Infrastructure
-              </span>
-              <span className="text-gray-700">•</span>
-              <span className="flex items-center gap-1">
-                <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                Data in Australia
+                Secure Infrastructure
               </span>
             </div>
           </div>

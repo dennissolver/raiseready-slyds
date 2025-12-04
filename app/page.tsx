@@ -1,215 +1,223 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { CheckCircle } from 'lucide-react'
-import { ProductRoadmap } from '@/components/landing/product-roadmap'
+import { CheckCircle, Upload, MessageSquare, Users, Award, TrendingUp, Sparkles } from 'lucide-react'
 import Footer from '@/components/Footer';
-
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+      <div className="bg-gradient-to-br from-purple-50 via-violet-50 to-amber-50 py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-6xl font-bold mb-6">
-            🚀 RaiseReady Impact
+          <div className="mb-6">
+            <span className="inline-block px-4 py-2 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">
+              $2B+ raised for 500+ startups
+            </span>
+          </div>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
+            Want to be the next <span className="text-primary">UNICORN</span>?
           </h1>
-          <p className="text-2xl text-muted-foreground mb-4">
-            AI-Powered Fundraising Coach for Impact Founders & Investors
+          <p className="text-3xl font-semibold text-primary mb-4">
+            Become a STORYTELLER.
           </p>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Connect impact investors with social enterprises through AI-powered matching and coaching.
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            Submit your pitch deck to SlydS and get AI-powered coaching from India's leading fundraising advisory.
           </p>
 
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link href="/signup/founder">
-              <Button size="lg" className="text-lg px-8 py-6 bg-blue-600 hover:bg-blue-700">
-                🚀 I'm a Founder
+            <Link href="/founder/upload">
+              <Button size="lg" className="text-lg px-8 py-6 bg-primary hover:bg-primary/90">
+                <Upload className="w-5 h-5 mr-2" />
+                Submit Your Pitch
               </Button>
             </Link>
-            <Link href="/signup/investor">
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-purple-500 text-purple-700 hover:bg-purple-50">
-                💼 I'm an Investor
+            <Link href="/login">
+              <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-primary text-primary hover:bg-primary/5">
+                Sign In
               </Button>
             </Link>
           </div>
 
-          <div className="mt-6 text-center text-sm text-muted-foreground">
-            Already have an account? <a href="/login" className="text-primary hover:underline font-medium">Sign in here</a>
-          </div>
+          <p className="mt-6 text-sm text-muted-foreground">
+            New founder? <Link href="/signup/founder" className="text-primary hover:underline font-medium">Create your account</Link>
+          </p>
+        </div>
+      </div>
 
-          <div className="mt-8 pt-8 border-t border-blue-200">
-            <Link href="/learn/impact-valuation">
-              <Button size="lg" variant="outline" className="gap-2 border-blue-400 text-blue-700 hover:bg-blue-50">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                How We Value Impact
-              </Button>
-            </Link>
-            <p className="text-sm text-muted-foreground mt-2">
-              Learn about our transparent SDG-based impact valuation framework
-            </p>
+      {/* Trust Bar */}
+      <div className="py-8 bg-white border-b">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap justify-center items-center gap-8 text-center">
+            <div>
+              <p className="text-3xl font-bold text-primary">500+</p>
+              <p className="text-sm text-muted-foreground">Startups Coached</p>
+            </div>
+            <div className="w-px h-12 bg-gray-200 hidden md:block"></div>
+            <div>
+              <p className="text-3xl font-bold text-primary">$2B+</p>
+              <p className="text-sm text-muted-foreground">Total Raised</p>
+            </div>
+            <div className="w-px h-12 bg-gray-200 hidden md:block"></div>
+            <div>
+              <p className="text-3xl font-bold text-primary">Since 2013</p>
+              <p className="text-sm text-muted-foreground">Helping Founders</p>
+            </div>
+            <div className="w-px h-12 bg-gray-200 hidden md:block"></div>
+            <div>
+              <p className="text-3xl font-bold text-primary">Seed → IPO</p>
+              <p className="text-sm text-muted-foreground">All Stages</p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Browse Section */}
-      <div className="py-16 bg-white">
+      {/* How It Works */}
+      <div className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Explore the Impact Ecosystem</h2>
+            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+            <p className="text-xl text-muted-foreground">From pitch to investor-ready in three steps</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="text-center p-6">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Upload className="w-8 h-8 text-primary" />
+              </div>
+              <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">
+                Step 1
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Upload Your Deck</h3>
+              <p className="text-muted-foreground">
+                Submit your pitch deck PDF. Our AI analyzes your story, structure, and investor-readiness.
+              </p>
+            </div>
+
+            <div className="text-center p-6">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <MessageSquare className="w-8 h-8 text-primary" />
+              </div>
+              <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-3">
+                Step 2
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Get AI Coaching</h3>
+              <p className="text-muted-foreground">
+                Practice your pitch with our AI coach. Get feedback on storytelling, delivery, and investor Q&A.
+              </p>
+            </div>
+
+            <div className="text-center p-6">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-amber-600" />
+              </div>
+              <div className="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-sm font-medium rounded-full mb-3">
+                Step 3
+              </div>
+              <h3 className="text-xl font-semibold mb-2">SlydS Review</h3>
+              <p className="text-muted-foreground">
+                Our team reviews your polished pitch. If there's a fit, we'll reach out to discuss next steps.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* AI Coaching Features */}
+      <div className="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">AI-Powered Pitch Coaching</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Discover impact projects seeking funding and investors backing sustainable ventures
+              Built on the methodology that has helped 500+ startups raise $2B+
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Browse Projects */}
-            <Link href="/projects">
-              <div className="group hover:shadow-xl transition-all p-8 rounded-lg border-2 border-blue-100 hover:border-blue-300 cursor-pointer bg-gradient-to-br from-blue-50 to-white">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <span className="text-3xl">🌱</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3">Browse Projects</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Discover impact startups and sustainable ventures seeking investment
-                  </p>
-                  <Button className="w-full" size="lg">
-                    View All Projects →
-                  </Button>
-                </div>
-              </div>
-            </Link>
-
-            {/* Browse Investors */}
-            <Link href="/investors">
-              <div className="group hover:shadow-xl transition-all p-8 rounded-lg border-2 border-purple-100 hover:border-purple-300 cursor-pointer bg-gradient-to-br from-purple-50 to-white">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <span className="text-3xl">💼</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3">Browse Investors</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Connect with impact investors and find the right funding partners
-                  </p>
-                  <Button className="w-full" size="lg" variant="outline">
-                    View All Investors →
-                  </Button>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* How It Works - Founders */}
-      <div className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">For Impact Founders: How It Works</h2>
-            <p className="text-muted-foreground">Get investor-ready in three simple steps</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">📤</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">1. Upload Your Deck</h3>
-              <p className="text-muted-foreground">
-                Upload your pitch deck PDF and we'll analyze it for impact storytelling
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">💬</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">2. Get AI Coaching</h3>
-              <p className="text-muted-foreground">
-                Our AI coach helps you refine your theory of change and impact metrics
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">🎯</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">3. Match with Impact Investors</h3>
-              <p className="text-muted-foreground">
-                Connect with investors aligned with your SDGs and social mission
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* For Investors */}
-      <div className="py-20 bg-slate-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">For Impact Investors: Quality Deal Flow</h2>
-            <p className="text-muted-foreground">Mission-driven founders matched to your impact thesis</p>
-          </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {[
-              'AI discovery session to define your impact investment thesis',
-              'Filter by SDG alignment and ESG criteria',
-              'Only see social enterprises matching YOUR values',
-              'Complete privacy - no spam, no cold calls',
-              'Review impact metrics and financial sustainability',
-              'Track your impact pipeline',
+              { icon: Sparkles, text: 'Storytelling analysis - transform data into compelling narratives' },
+              { icon: Award, text: 'Investor-readiness score across key pitch areas' },
+              { icon: MessageSquare, text: 'Interactive AI coach for pitch practice' },
+              { icon: Users, text: 'Simulated investor Q&A sessions' },
+              { icon: TrendingUp, text: 'Track your progress and improvement' },
+              { icon: CheckCircle, text: 'Unlimited practice until you\'re confident' },
             ].map((feature, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-purple-600 mt-1 shrink-0" />
-                <span>{feature}</span>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link href="/signup/investor">
-              <Button size="lg" variant="outline" className="border-purple-500 text-purple-700 hover:bg-purple-50">
-                Join as Impact Investor
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* What Founders Get */}
-      <div className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">What Impact Founders Get</h2>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              'AI analysis of your impact narrative and theory of change',
-              'Readiness score (0-100) across 6 key impact areas',
-              'Interactive coaching with impact-focused AI',
-              'Guidance on impact metrics and measurement',
-              'Unlimited practice sessions',
-              'Match with aligned impact investors',
-            ].map((feature, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-green-500 mt-1 shrink-0" />
-                <span>{feature}</span>
+              <div key={i} className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm">
+                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                  <feature.icon className="w-5 h-5 text-primary" />
+                </div>
+                <span className="text-gray-700">{feature.text}</span>
               </div>
             ))}
           </div>
           <div className="text-center mt-12">
             <Link href="/signup/founder">
-              <Button size="lg">
-                Get Started Free
+              <Button size="lg" className="bg-primary hover:bg-primary/90">
+                Start Practicing Your Pitch
               </Button>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Product Roadmap */}
-      <ProductRoadmap />
+      {/* Why SlydS */}
+      <div className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Why SlydS?</h2>
+              <p className="text-xl text-muted-foreground">
+                India's leading fundraising advisory since 2013
+              </p>
+            </div>
 
-      {/* Footer - NEW COMPONENT REPLACES OLD FOOTER */}
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="p-6 border rounded-xl">
+                <h3 className="text-xl font-semibold mb-3">Proven Track Record</h3>
+                <p className="text-muted-foreground">
+                  We've helped startups from Seed to Series C and beyond. Our clients include companies that have gone on to become unicorns.
+                </p>
+              </div>
+
+              <div className="p-6 border rounded-xl">
+                <h3 className="text-xl font-semibold mb-3">Storytelling Experts</h3>
+                <p className="text-muted-foreground">
+                  Great pitches aren't about data - they're about stories. We help you transform your vision into a narrative that investors can't ignore.
+                </p>
+              </div>
+
+              <div className="p-6 border rounded-xl">
+                <h3 className="text-xl font-semibold mb-3">AI + Human Expertise</h3>
+                <p className="text-muted-foreground">
+                  Our AI coach is trained on what actually works. Combined with our team's expertise, you get the best of both worlds.
+                </p>
+              </div>
+
+              <div className="p-6 border rounded-xl">
+                <h3 className="text-xl font-semibold mb-3">Investor Network</h3>
+                <p className="text-muted-foreground">
+                  We work with top VCs and angels across India and globally. When you're ready, we can help you connect.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="py-20 bg-primary text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-4">Ready to Perfect Your Pitch?</h2>
+          <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
+            Join 500+ founders who have transformed their pitch with SlydS
+          </p>
+          <Link href="/founder/upload">
+            <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
+              <Upload className="w-5 h-5 mr-2" />
+              Submit Your Pitch Deck
+            </Button>
+          </Link>
+        </div>
+      </div>
+
+      {/* Footer */}
       <Footer />
     </div>
   )
