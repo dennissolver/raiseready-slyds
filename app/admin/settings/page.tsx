@@ -85,7 +85,7 @@ export default function SuperadminSettingsPage() {
     try {
       setIsLoading(true);
 
-      const { data, error } = await supabase
+      const { data, error }: { data: any, error: any } = await supabase
         .from('global_settings' as any)
         .select('*')
         .order('category', { ascending: true })
@@ -331,3 +331,4 @@ export default function SuperadminSettingsPage() {
     </div>
   );
 }
+
