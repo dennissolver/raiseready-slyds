@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { VoiceInterface } from '@/components/voice-coach/VoiceInterface';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Mic, Users, MessageSquare, Target } from 'lucide-react';
+import { ArrowLeft, Mic, Users, MessageSquare, Sparkles } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { COACHING_MODES, INVESTOR_PERSONAS } from '@/types/voice-coaching';
 import type { CoachingMode, InvestorPersona } from '@/types/voice-coaching';
@@ -46,8 +46,8 @@ export default function PracticePage() {
         setProjectId(deck.id);
         setProjectData({
           name: deck.title || 'Your Project',
-          sdgs: deck.sdgs || [],
-          summary: deck.one_liner || 'Impact project',
+          sectors: deck.sectors || [],
+          summary: deck.one_liner || 'Your startup pitch',
         });
       } else {
         // No deck found - redirect to upload
@@ -120,7 +120,7 @@ export default function PracticePage() {
     'pitch-practice': Mic,
     'investor-simulation': Users,
     'q-and-a': MessageSquare,
-    'impact-storytelling': Target,
+    'storytelling': Sparkles,
   };
 
   return (
@@ -130,21 +130,24 @@ export default function PracticePage() {
         <div>
           <h1 className="text-3xl font-bold mb-2">Voice AI Pitch Practice</h1>
           <p className="text-muted-foreground">
-            Practice your pitch with Sharene, your AI coach, and get real-time feedback
+            Practice your pitch with Shamini, your AI coach, and get real-time feedback
           </p>
         </div>
 
         {/* Project Info */}
         {projectData && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <p className="text-sm text-blue-900">
+          <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+            <p className="text-sm">
               <strong>Practicing with:</strong> {projectData.name}
-              {projectData.sdgs.length > 0 && (
-                <span className="ml-2">
-                  | SDGs: {projectData.sdgs.map((n: number) => `SDG ${n}`).join(', ')}
+              {projectData.sectors && projectData.sectors.length > 0 && (
+                <span className="ml-2 text-muted-foreground">
+                  | {projectData.sectors.slice(0, 3).join(', ')}
                 </span>
               )}
             </p>
+            {projectData.summary && (
+              <p className="text-sm text-muted-foreground mt-1">{projectData.summary}</p>
+            )}
           </div>
         )}
 
@@ -153,7 +156,7 @@ export default function PracticePage() {
           <h2 className="text-xl font-semibold">Choose Coaching Mode</h2>
           <div className="grid md:grid-cols-2 gap-4">
             {Object.entries(COACHING_MODES).map(([key, config]) => {
-              const Icon = modeIcons[key as CoachingMode];
+              const Icon = modeIcons[key as keyof typeof modeIcons] || Mic;
               return (
                 <Card
                   key={key}
@@ -183,12 +186,12 @@ export default function PracticePage() {
           </div>
         </div>
 
-        {/* Persona Selection (if slyds-simulation) */}
+        {/* Persona Selection (if investor-simulation) */}
         {selectedMode === 'investor-simulation' && (
           <div className="space-y-4">
             <h2 className="text-xl font-semibold">Choose Investor Type</h2>
             <p className="text-sm text-muted-foreground">
-              Sharene will role-play as this type of investor to give you realistic practice
+              Shamini will role-play as this type of investor to give you realistic practice
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               {Object.entries(INVESTOR_PERSONAS).map(([key, config]) => (

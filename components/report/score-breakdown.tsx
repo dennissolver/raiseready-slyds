@@ -7,7 +7,7 @@ interface ScoreBreakdownProps {
     solutionFit: number
     marketOpportunity: number
     teamCredibility: number
-    impactPotential: number
+    narrativeStrength: number
     financialViability: number
   }
 }
@@ -17,7 +17,7 @@ const scoreLabels = {
   solutionFit: 'Solution Fit',
   marketOpportunity: 'Market Opportunity',
   teamCredibility: 'Team Credibility',
-  impactPotential: 'Impact Potential',
+  narrativeStrength: 'Narrative Strength',
   financialViability: 'Financial Viability',
 }
 
@@ -25,7 +25,7 @@ export function ScoreBreakdown({ scores }: ScoreBreakdownProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Detailed Scores</CardTitle>
+        <CardTitle>Pitch Readiness Scores</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {Object.entries(scores).map(([key, value]) => (

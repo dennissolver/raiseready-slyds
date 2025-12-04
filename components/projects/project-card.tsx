@@ -22,7 +22,7 @@ interface ProjectCardProps {
   project: Project;
   isPublicView?: boolean;
   showWatchlist?: boolean;
-  userRole?: 'founder' | 'investor';
+  userRole?: 'founder' | 'slyds_admin';
   variant?: 'default' | 'compact';
 }
 
@@ -46,7 +46,7 @@ export function ProjectCard({
     return `$${amount}`;
   };
 
-  // Get score color - updated to handle null
+  // Get score color
   const getScoreColor = (score: number | null) => {
     if (score === null) return 'text-gray-600 bg-gray-50';
     if (score >= 80) return 'text-green-600 bg-green-50';
@@ -55,7 +55,7 @@ export function ProjectCard({
     return 'text-red-600 bg-red-50';
   };
 
-  // Determine what to show based on visibility and user status
+  // Determine what to show based on visibility
   const showFullDetails = !isPublicView || project.visibility === 'public';
   const showScore = showFullDetails && project.readiness_score !== null;
   const showFunding = showFullDetails;
@@ -66,14 +66,9 @@ export function ProjectCard({
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1 min-w-0">
-              <Link
-                href={`/projects/${project.id}`}
-                className="hover:underline"
-              >
-                <h3 className="font-semibold text-lg truncate">
-                  {project.title}
-                </h3>
-              </Link>
+              <h3 className="font-semibold text-lg truncate">
+                {project.title}
+              </h3>
               {project.one_liner && (
                 <p className="text-sm text-muted-foreground line-clamp-1 mt-1">
                   {project.one_liner}
@@ -125,14 +120,9 @@ export function ProjectCard({
       <CardHeader>
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
-            <Link
-              href={`/projects/${project.id}`}
-              className="hover:underline"
-            >
-              <h3 className="font-semibold text-xl truncate">
-                {project.title}
-              </h3>
-            </Link>
+            <h3 className="font-semibold text-xl truncate">
+              {project.title}
+            </h3>
             {project.one_liner && (
               <p className="text-sm text-muted-foreground line-clamp-2 mt-2">
                 {project.one_liner}
@@ -192,31 +182,6 @@ export function ProjectCard({
           )}
         </div>
 
-        {/* SDGs */}
-        {showFullDetails && project.sdgs && project.sdgs.length > 0 && (
-          <div>
-            <p className="text-xs font-medium text-muted-foreground mb-2">
-              UN SDGs:
-            </p>
-            <div className="flex flex-wrap gap-1">
-              {project.sdgs.slice(0, 5).map((sdg) => (
-                <Badge
-                  key={sdg}
-                  variant="outline"
-                  className="text-xs"
-                >
-                  SDG {sdg}
-                </Badge>
-              ))}
-              {project.sdgs.length > 5 && (
-                <Badge variant="outline" className="text-xs">
-                  +{project.sdgs.length - 5}
-                </Badge>
-              )}
-            </div>
-          </div>
-        )}
-
         {/* Public View Teaser */}
         {isPublicView && project.visibility !== 'public' && (
           <div className="pt-4 border-t">
@@ -229,13 +194,6 @@ export function ProjectCard({
       </CardContent>
 
       <CardFooter className="flex gap-2">
-        <Button asChild variant="outline" className="flex-1">
-          <Link href={`/projects/${project.id}`}>
-            View Details
-            <ExternalLink className="w-4 h-4 ml-2" />
-          </Link>
-        </Button>
-
         {showWatchlist && userRole && showFullDetails && project.founder_id && (
           <WatchlistButton
             targetId={project.founder_id}
@@ -243,7 +201,7 @@ export function ProjectCard({
             userRole={userRole}
             variant="outline"
             size="default"
-            showLabel={false}
+            showLabel={true}
           />
         )}
       </CardFooter>
