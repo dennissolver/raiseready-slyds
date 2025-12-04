@@ -1,6 +1,6 @@
 /**
  * Investor Personas Configuration
- * Exports investor persona configurations
+ * Exports slyds persona configurations
  */
 
 import { INVESTOR_PERSONAS, getPersonaConfig, buildInvestorSimPrompt } from '../types/investor-personas';

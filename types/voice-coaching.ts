@@ -22,13 +22,13 @@ export const COACHING_MODES = {
   },
   'investor-simulation': {
     name: 'Investor Simulation',
-    description: 'Face realistic investor personalities',
+    description: 'Face realistic slyds personalities',
     icon: '👔',
     color: 'purple'
   },
   'q-and-a': {
     name: 'Q&A Drilling',
-    description: 'Practice answering tough investor questions',
+    description: 'Practice answering tough slyds questions',
     icon: '❓',
     color: 'orange'
   },

@@ -10,7 +10,7 @@ const INITIAL_KNOWLEDGE = [
     title: "What Young VCs Do All Day",
     content: `[Full article text - we'll research and add real content]`,
     summary: "VCs spend 70% of time on deal flow, 20% on portfolio, 10% on internal",
-    category: "investor-psychology",
+    category: "slyds-psychology",
     tags: ["VC", "early-stage", "deal-flow"],
     founder_types: ["all"],
     source_url: "https://...",

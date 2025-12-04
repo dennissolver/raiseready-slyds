@@ -4,13 +4,13 @@ import { Badge } from '@/components/ui/badge'
 
 interface ReadinessScoreProps {
   score: number
-  level: 'not-ready' | 'needs-work' | 'ready' | 'investor-ready'
+  level: 'not-ready' | 'needs-work' | 'ready' | 'slyds-ready'
 }
 
 export function ReadinessScore({ score, level }: ReadinessScoreProps) {
   const getLevelColor = () => {
     switch (level) {
-      case 'investor-ready':
+      case 'slyds-ready':
         return 'bg-green-500'
       case 'ready':
         return 'bg-blue-500'
@@ -23,7 +23,7 @@ export function ReadinessScore({ score, level }: ReadinessScoreProps) {
 
   const getLevelText = () => {
     switch (level) {
-      case 'investor-ready':
+      case 'slyds-ready':
         return 'Investor Ready'
       case 'ready':
         return 'Ready'

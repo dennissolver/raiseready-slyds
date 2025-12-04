@@ -16,7 +16,7 @@ export interface ReadinessAssessment {
   weaknesses: string[]
   criticalGaps: string[]
   recommendations: string[]
-  readinessLevel: 'not-ready' | 'needs-work' | 'ready' | 'investor-ready'
+  readinessLevel: 'not-ready' | 'needs-work' | 'ready' | 'slyds-ready'
 }
 
 // ============================================================================
@@ -135,7 +135,7 @@ export function calculateOverallScore(scores: DeckScores): number {
 }
 
 export function getReadinessLevel(score: number): ReadinessAssessment['readinessLevel'] {
-  if (score >= 85) return 'investor-ready'
+  if (score >= 85) return 'slyds-ready'
   if (score >= 70) return 'ready'
   if (score >= 50) return 'needs-work'
   return 'not-ready'

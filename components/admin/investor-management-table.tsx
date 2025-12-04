@@ -45,7 +45,7 @@ export function InvestorManagementTable({ investors: initialInvestors }: Investo
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to delete investor')
+        throw new Error(data.error || 'Failed to delete slyds')
       }
 
       // Remove from local state
@@ -58,10 +58,10 @@ export function InvestorManagementTable({ investors: initialInvestors }: Investo
 
       router.refresh()
     } catch (error) {
-      console.error('Error deleting investor:', error)
+      console.error('Error deleting slyds:', error)
       toast({
         title: 'Error',
-        description: error instanceof Error ? error.message : 'Failed to delete investor',
+        description: error instanceof Error ? error.message : 'Failed to delete slyds',
         variant: 'destructive',
       })
       throw error // Re-throw to keep dialog open on error

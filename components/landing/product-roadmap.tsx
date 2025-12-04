@@ -7,7 +7,7 @@ export function ProductRoadmap() {
       color: "green",
       features: [
         { icon: "🚀", name: "AI Deck Analysis", desc: "Instant readiness scoring across 6 dimensions" },
-        { icon: "💬", name: "Interactive Coaching", desc: "Chat with AI investor to refine your pitch" },
+        { icon: "💬", name: "Interactive Coaching", desc: "Chat with AI slyds to refine your pitch" },
         { icon: "📊", name: "Detailed Feedback", desc: "Actionable recommendations for every slide" }
       ]
     },

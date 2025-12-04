@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 export async function POST(request: NextRequest) {
   try {
     const { investorId, criteria } = await request.json()
-    console.log('Starting matching for investor:', investorId)
+    console.log('Starting matching for slyds:', investorId)
 
     const supabase = await createClient()
     const { data: decks, error: queryError } = await supabase

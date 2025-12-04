@@ -9,26 +9,24 @@ export async function GET(request: Request) {
     const supabase = await createClient()
     await supabase.auth.exchangeCodeForSession(code)
 
-    // Get user to check their role
     const { data: { user } } = await supabase.auth.getUser()
 
     if (user) {
-      // Check founder profile for role
-      const { data: founder } = await supabase
-        .from('founders')
-        .select('user_role')
-        .eq('id', user.id)
-        .single() as { data: { user_role: string } | null }
+      // Check user_roles table for slyds_admin
+      const { data: roleData } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', user.id)
+        .single()
 
-      // Route based on role
-      if (founder?.user_role === 'investor') {
-        return NextResponse.redirect(`${requestUrl.origin}/investor/dashboard`)
-      } else {
-        return NextResponse.redirect(`${requestUrl.origin}/founder/dashboard`)
+      if (roleData?.role === 'slyds_admin') {
+        return NextResponse.redirect(`${requestUrl.origin}/slyds/dashboard`)
       }
+
+      // Default to founder
+      return NextResponse.redirect(`${requestUrl.origin}/founder/dashboard`)
     }
   }
 
-  // Default fallback
   return NextResponse.redirect(`${requestUrl.origin}/`)
 }

@@ -1,13 +1,13 @@
-import { InvestorSidebar } from './_components/sidebar'
+import { SlydsSidebar } from './_components/sidebar'
 
-export default function InvestorDashboardLayout({
+export default function SlydsDashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
     <div className="flex min-h-screen">
-      <InvestorSidebar />
+      <SlydsSidebar />
       <main className="flex-1 p-8">
         {children}
       </main>

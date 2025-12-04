@@ -139,7 +139,7 @@ CREATE TABLE sda_sessions (
 #### ✅ CLONE: User Roles
 ```sql
 -- RaiseReady pattern
-CREATE TYPE user_role AS ENUM ('founder', 'investor', 'admin', 'superadmin');
+CREATE TYPE user_role AS ENUM ('founder', 'slyds', 'admin', 'superadmin');
 ```
 **SDA Adaptation:**
 ```sql
@@ -481,7 +481,7 @@ export default async function Page() {
   const user = await getUser()
   
   if (user.role === 'founder') redirect('/founder/dashboard')
-  if (user.role === 'investor') redirect('/investor/dashboard')
+  if (user.role === 'slyds') redirect('/investor/dashboard')
   
   return <LandingPage />
 }

@@ -170,7 +170,7 @@ export default function InvestorProfilePage() {
               </div>
             </div>
             <div className="flex gap-2">
-              <Link href="/investor/dashboard">
+              <Link href="/app/slyds/dashboard">
                 <Button variant="outline" size="sm">
                   Back to Dashboard
                 </Button>
@@ -490,7 +490,7 @@ export default function InvestorProfilePage() {
                   <div className="text-center py-8 text-muted-foreground">
                     <MessageSquare className="w-12 h-12 mx-auto mb-3 opacity-50" />
                     <p className="text-sm mb-3">No AI coach insights yet</p>
-                    <Link href="/investor/coaching">
+                    <Link href="/app/slyds/coaching">
                       <Button variant="outline" size="sm">
                         Start a Coaching Session
                       </Button>
@@ -567,7 +567,7 @@ export default function InvestorProfilePage() {
 
         {/* Save Button (sticky bottom) */}
         <div className="sticky bottom-0 bg-white border-t mt-8 -mx-4 px-4 py-4 flex justify-end gap-3">
-          <Link href="/investor/dashboard">
+          <Link href="/app/slyds/dashboard">
             <Button variant="outline">Cancel</Button>
           </Link>
           <Button onClick={handleSave} disabled={isSaving} className="gap-2">

@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Save criteria to investor profile
+    // Save criteria to slyds profile
     await supabase
       .from('founders')
       .update({

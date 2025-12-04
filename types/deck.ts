@@ -42,5 +42,5 @@ export interface DeckAnalysisResult {
   strengths: string[]
   weaknesses: string[]
   recommendations: string[]
-  readinessLevel: 'not-ready' | 'needs-work' | 'ready' | 'investor-ready'
+  readinessLevel: 'not-ready' | 'needs-work' | 'ready' | 'slyds-ready'
 }

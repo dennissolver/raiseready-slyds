@@ -11,7 +11,18 @@ export default function LoginPage() {
   const [isChecking, setIsChecking] = useState(true)
 
   const getUserRole = async (userId: string): Promise<string> => {
-    // Check founders table first
+    // Check user_roles table first (for slyds_admin)
+    const { data: roleData, error: roleError } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', userId)
+      .single()
+
+    if (!roleError && roleData?.role === 'slyds_admin') {
+      return 'slyds_admin'
+    }
+
+    // Check founders table
     const { data: founder, error: founderError } = await supabase
       .from('founders')
       .select('user_role')
@@ -19,18 +30,7 @@ export default function LoginPage() {
       .single()
 
     if (!founderError && founder) {
-      return (founder as any).user_role
-    }
-
-     // Check investor_profiles table
-    const { data: investor, error: investorError } = await supabase
-      .from('investor_profiles')
-      .select('id')
-      .eq('id', userId)
-      .single() as { data: { user_role: string } | null, error: any }
-
-    if (!investorError && investor) {
-      return 'investor'
+      return 'founder'
     }
 
     // Check pitch_decks table (if user created a pitch, they're a founder)
@@ -54,9 +54,9 @@ export default function LoginPage() {
 
     console.log('User role detected:', role)
 
-    if (role === 'investor') {
-      console.log('Redirecting to investor dashboard')
-      router.push('/investor/dashboard')
+    if (role === 'slyds_admin') {
+      console.log('Redirecting to SlydS admin dashboard')
+      router.push('/slyds/dashboard')
     } else {
       console.log('Redirecting to founder dashboard')
       router.push('/founder/dashboard')
@@ -91,7 +91,7 @@ export default function LoginPage() {
 
   if (isChecking) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-violet-100">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">Checking session...</p>
@@ -101,22 +101,32 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-violet-100">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
-          <p className="text-muted-foreground">Sign in to your RaiseReady Impact account</p>
+          <h1 className="text-3xl font-bold mb-2">Welcome to SlydS</h1>
+          <p className="text-muted-foreground">Sign in to continue</p>
         </div>
 
         <Auth
           supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
+          appearance={{
+            theme: ThemeSupa,
+            variables: {
+              default: {
+                colors: {
+                  brand: 'hsl(262, 83%, 58%)',
+                  brandAccent: 'hsl(262, 83%, 45%)',
+                }
+              }
+            }
+          }}
           view="sign_in"
           providers={[]}
         />
 
         <div className="mt-6 text-center text-sm text-muted-foreground">
-          Don't have an account? <a href="/signup" className="text-primary hover:underline">Sign up</a>
+          Want to submit a pitch? <a href="/signup/founder" className="text-primary hover:underline">Create an account</a>
         </div>
       </div>
     </div>

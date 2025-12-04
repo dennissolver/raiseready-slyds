@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { PlusCircle, FileText, TrendingUp, Users, CheckCircle, Circle, ArrowRight, Target, BookOpen, Mic, Search, User } from 'lucide-react';
+import { PlusCircle, FileText, TrendingUp, CheckCircle, Circle, ArrowRight, Target, BookOpen, Mic, User } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { safeDate } from '@/lib/utils/date';
 
@@ -20,14 +20,12 @@ export default function DashboardPage() {
     requiredRole: 'founder',
   });
 
-  // ✅ ALL STATE DECLARATIONS BEFORE ANY EARLY RETURNS
   const [decks, setDecks] = useState<PitchDeck[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasCompletedDiscovery, setHasCompletedDiscovery] = useState(false);
   const [hasCompletedProfile, setHasCompletedProfile] = useState(false);
   const supabase = createClient();
 
-  // ✅ SINGLE useEffect WITH user?.id DEPENDENCY
   useEffect(() => {
     const loadAllData = async () => {
       if (!user?.id) return;
@@ -76,7 +74,7 @@ export default function DashboardPage() {
     };
 
     loadAllData();
-  }, [user?.id]); // ✅ Only user.id, not the whole user object
+  }, [user?.id]);
 
   if (authLoading) {
     return (
@@ -89,7 +87,7 @@ export default function DashboardPage() {
     );
   }
 
-  // Journey Steps - CORRECT ORDER
+  // Journey Steps - Slyds version (5 steps, no "Find Investors")
   const journeySteps = [
     {
       number: 1,
@@ -113,8 +111,8 @@ export default function DashboardPage() {
     },
     {
       number: 3,
-      title: 'Discovery Session',
-      description: 'AI coach clarifies your impact story',
+      title: 'Story Discovery',
+      description: 'AI coach helps craft your narrative',
       icon: Target,
       href: '/founder/discovery',
       completed: hasCompletedDiscovery,
@@ -133,31 +131,17 @@ export default function DashboardPage() {
       bgColor: 'bg-orange-50',
       disabled: decks.length === 0,
     },
-
-     // (Find the journeySteps array around line 94)
-
     {
       number: 5,
       title: 'Practice Your Pitch',
       description: 'Rehearse with voice coaching',
       icon: Mic,
-      href: '/founder/practice',  // ✅ Changed from '#'
+      href: '/founder/practice',
       completed: false,
       color: 'text-pink-600',
       bgColor: 'bg-pink-50',
-      disabled: false,  // ✅ Changed from true
-      comingSoon: false,  // ✅ Changed from true
-    },
-
-    {
-      number: 6,
-      title: 'Find Investors',
-      description: 'Match with aligned impact investors',
-      icon: Search,
-      href: '/investors',
-      completed: false,
-      color: 'text-indigo-600',
-      bgColor: 'bg-indigo-50',
+      disabled: false,
+      comingSoon: false,
     },
   ];
 
@@ -170,7 +154,7 @@ export default function DashboardPage() {
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-2">Founder Dashboard</h1>
         <p className="text-muted-foreground">
-          Your journey to becoming investor-ready
+          Your journey to becoming investor-ready with SlydS
         </p>
       </div>
 
@@ -181,7 +165,7 @@ export default function DashboardPage() {
             <div>
               <CardTitle className="text-2xl mb-2">🎯 Your Path to Investor-Ready</CardTitle>
               <p className="text-sm text-muted-foreground">
-                Complete each step to maximize your fundraising success
+                Complete each step to perfect your pitch for SlydS review
               </p>
             </div>
             {nextStep && !nextStep.disabled && (
@@ -195,7 +179,7 @@ export default function DashboardPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
+          <div className="grid gap-4 md:grid-cols-5">
             {journeySteps.map((step) => {
               const Icon = step.icon;
               const isNext = step.number === (currentStep + 1);
@@ -316,7 +300,7 @@ export default function DashboardPage() {
             <FileText className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
             <p className="text-lg font-medium mb-2">No pitch decks yet</p>
             <p className="text-muted-foreground mb-6">
-              Upload your first deck to get AI-powered analysis and investor matching
+              Upload your first deck to get AI-powered analysis and coaching
             </p>
             <Link href="/founder/upload">
               <Button size="lg">

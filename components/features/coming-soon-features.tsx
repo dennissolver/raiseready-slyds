@@ -49,14 +49,14 @@ export function ComingSoonFeatures() {
     {
       icon: Zap,
       title: "Real-Time Pitch Telepromter",
-      description: "Practice mode that shows you what to say next, adapts to investor questions, and keeps you on track.",
+      description: "Practice mode that shows you what to say next, adapts to slyds questions, and keeps you on track.",
       badge: "Q3 2026",
       priority: "low"
     },
     {
       icon: Sparkles,
       title: "AI-Powered Slide Generator",
-      description: "Describe your business in plain English. AI generates a complete investor deck in your brand style.",
+      description: "Describe your business in plain English. AI generates a complete slyds deck in your brand style.",
       badge: "Q2 2026",
       priority: "low"
     }

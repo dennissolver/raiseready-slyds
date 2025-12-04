@@ -1,22 +1,22 @@
-// app/investor/dashboard/_components/sidebar.tsx (or wherever this lives)
+// app/slyds/dashboard/_components/sidebar.tsx
 
 'use client'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, Users, BookOpen, Calculator, Settings, LogOut } from 'lucide-react'
+import { Home, Users, Target, Inbox, Star, MessageSquare, Settings, LogOut } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
-export function InvestorSidebar() {
+export function SlydsSidebar() {
   const pathname = usePathname()
   const router = useRouter()
   const supabase = createClient()
 
   const links = [
-    { href: '/investor/dashboard', label: 'Dashboard', icon: Home },
-    { href: '/investor/discovery', label: 'Discovery Session', icon: Users },
-    { href: '/learn/impact-valuation', label: 'Impact Framework', icon: BookOpen },
-    { href: '/learn/impact-calculator', label: 'Impact Calculator', icon: Calculator },
-    { href: '/investor/settings', label: 'Settings', icon: Settings },
+    { href: '/slyds/dashboard', label: 'Dashboard', icon: Home },
+    { href: '/slyds/thesis', label: 'Investment Thesis', icon: Target },
+    { href: '/slyds/discovery', label: 'AI Discovery', icon: MessageSquare },
+    { href: '/slyds/watchlist', label: 'Shortlist', icon: Star },
+    { href: '/slyds/profile', label: 'Settings', icon: Settings },
   ]
 
   const handleLogout = async () => {
@@ -28,16 +28,16 @@ export function InvestorSidebar() {
   return (
     <nav className="w-64 bg-white border-r min-h-screen p-6 flex flex-col">
       <div className="mb-8">
-        <Link href="/" className="text-xl font-bold text-purple-600">
-          RaiseReady Impact
+        <Link href="/" className="text-xl font-bold text-primary">
+          SlydS
         </Link>
-        <p className="text-xs text-muted-foreground mt-1">Investor Portal</p>
+        <p className="text-xs text-muted-foreground mt-1">Admin Portal</p>
       </div>
 
       <ul className="space-y-2">
         {links.map((link) => {
           const Icon = link.icon
-          const isActive = pathname === link.href
+          const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
 
           return (
             <li key={link.href}>
@@ -45,7 +45,7 @@ export function InvestorSidebar() {
                 href={link.href}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                   isActive
-                    ? 'bg-purple-50 text-purple-700 font-medium'
+                    ? 'bg-primary/10 text-primary font-medium'
                     : 'text-muted-foreground hover:bg-slate-50'
                 }`}
               >
@@ -57,19 +57,20 @@ export function InvestorSidebar() {
         })}
       </ul>
 
-      <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+      {/* Storytelling Tip Box */}
+      <div className="mt-8 p-4 bg-amber-50 rounded-lg border border-amber-200">
         <div className="flex items-start gap-2">
-          <Calculator className="w-5 h-5 text-blue-600 flex-shrink-0" />
+          <Inbox className="w-5 h-5 text-amber-600 flex-shrink-0" />
           <div>
-            <h4 className="text-sm font-semibold text-blue-900 mb-1">
-              Impact Calculator
+            <h4 className="text-sm font-semibold text-amber-900 mb-1">
+              Review Pitches
             </h4>
-            <p className="text-xs text-blue-700 mb-2">
-              Test scenarios with our SDG valuation framework
+            <p className="text-xs text-amber-700 mb-2">
+              New submissions are waiting for your review
             </p>
-            <Link href="/learn/impact-valuation#calculator">
-              <span className="text-xs text-blue-600 hover:underline">
-                Try it now
+            <Link href="/slyds/dashboard">
+              <span className="text-xs text-amber-600 hover:underline">
+                View submissions →
               </span>
             </Link>
           </div>

@@ -1,6 +1,6 @@
 /**
  * Investor Persona Definitions
- * Different investor personalities for pitch practice simulation
+ * Different slyds personalities for pitch practice simulation
  */
 
 export interface InvestorPersonaConfig {
@@ -231,7 +231,7 @@ export function getPersonaConfig(persona: 'easy_going' | 'enthusiastic' | 'aggre
   return INVESTOR_PERSONAS[persona];
 }
 
-// Helper to build combined system prompt for investor simulation
+// Helper to build combined system prompt for slyds simulation
 export function buildInvestorSimPrompt(
   persona: 'easy_going' | 'enthusiastic' | 'aggressive',
   projectContext?: any

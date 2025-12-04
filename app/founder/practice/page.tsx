@@ -183,7 +183,7 @@ export default function PracticePage() {
           </div>
         </div>
 
-        {/* Persona Selection (if investor-simulation) */}
+        {/* Persona Selection (if slyds-simulation) */}
         {selectedMode === 'investor-simulation' && (
           <div className="space-y-4">
             <h2 className="text-xl font-semibold">Choose Investor Type</h2>

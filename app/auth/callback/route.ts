@@ -12,17 +12,19 @@ export async function GET(request: Request) {
     const { data: { user } } = await supabase.auth.getUser()
 
     if (user) {
-      const { data: founder } = await supabase
-        .from('founders')
-        .select('user_role')
-        .eq('id', user.id)
+      // Check user_roles table for slyds_admin
+      const { data: roleData } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', user.id)
         .single()
 
-      if (founder?.user_role === 'investor') {
-        return NextResponse.redirect(`${requestUrl.origin}/investor/dashboard`)
-      } else {
-        return NextResponse.redirect(`${requestUrl.origin}/founder/upload`)
+      if (roleData?.role === 'slyds_admin') {
+        return NextResponse.redirect(`${requestUrl.origin}/slyds/dashboard`)
       }
+
+      // Default to founder upload page
+      return NextResponse.redirect(`${requestUrl.origin}/founder/upload`)
     }
   }
 

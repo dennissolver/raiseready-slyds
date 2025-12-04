@@ -57,7 +57,7 @@ You're working with a founder who has uploaded their pitch deck. Help them refin
     team_story: "Tell me about your co-founders - how did you all find each other?",
     dream_outcome: "5 years from now, if this succeeds beyond your wildest dreams, what does that look like?",
     funding_why_now: "Why raise capital now? What changes if you wait 6 months?",
-    investor_alignment: "When you imagine your ideal investor, what do they care about beyond just returns?",
+    investor_alignment: "When you imagine your ideal slyds, what do they care about beyond just returns?",
     problem_passion: "Why does THIS particular problem keep you up at night?",
     target_customer: "Who feels this problem most acutely right now? Paint me a picture of them.",
     team_gaps: "What skills or perspectives are missing from your founding team right now?"

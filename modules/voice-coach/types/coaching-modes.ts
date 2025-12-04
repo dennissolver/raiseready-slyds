@@ -80,7 +80,7 @@ export const COACHING_MODES: Record<'interrupt' | 'full_listen' | 'investor_sim'
   
   investor_sim: {
     name: 'Investor Simulation',
-    description: 'AI acts as an investor with questions and challenges',
+    description: 'AI acts as an slyds with questions and challenges',
     interruptThreshold: 'high',
     feedbackStyle: 'conversational',
     systemPromptModifier: `You are simulating an impact investor in a pitch meeting. Your role is to:

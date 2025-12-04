@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 export default async function AdminInvestorsPage() {
   const supabase = await createClient()
 
-  // Fetch all investors (from founders table where user_role = 'investor')
+  // Fetch all investors (from founders table where user_role = 'slyds')
   const { data: investorsData, error } = await supabase
     .from('founders')
     .select(`
@@ -21,7 +21,7 @@ export default async function AdminInvestorsPage() {
     console.error('Error fetching investors:', error)
   }
 
-  // Get investor profiles for additional data
+  // Get slyds profiles for additional data
   const investorIds = investorsData?.map(i => i.id) || []
 
   const { data: profilesData } = await supabase
@@ -35,7 +35,7 @@ export default async function AdminInvestorsPage() {
     return acc
   }, {} as Record<string, any>) || {}
 
-  // Get watchlist counts for each investor
+  // Get watchlist counts for each slyds
   const { data: watchlistData } = await supabase
     .from('investor_watchlist')
     .select('investor_id')

@@ -1,4 +1,4 @@
-// lib/ai/investor-extraction.ts
+// lib/ai/slyds-extraction.ts
 import Anthropic from '@anthropic-ai/sdk'
 import { cleanJsonResponse } from './utils'
 
@@ -52,7 +52,7 @@ If they said "I backed a founder with no experience because of their passion", s
     const criteria = JSON.parse(cleanedResponse)
     return criteria
   } catch (error) {
-    console.error('Failed to parse investor criteria:', error)
+    console.error('Failed to parse slyds criteria:', error)
     console.error('Raw response:', responseText)
     console.error('Cleaned response:', cleanedResponse)
 

@@ -32,32 +32,26 @@ export default function FounderDiscoveryPage() {
 
   const loadExistingSession = async () => {
     try {
-      // Check if user has an existing discovery session
       const { data: existingSession, error } = await supabase
         .from('founder_profiles')
         .select('*')
         .eq('founder_id', user!.id)
         .single()
 
-      // Type assertion for discovery_questions structure
       const discoveryQuestions = existingSession?.discovery_questions as { messages?: Array<{role: string, content: string}> } | null
 
       if (existingSession && discoveryQuestions?.messages) {
-        // Resume from existing session
         setMessages(discoveryQuestions.messages)
         setSessionId(existingSession.id)
         setIsResuming(true)
 
-        // Check if already complete
         if (existingSession.completed_at) {
           setIsComplete(true)
         }
       } else {
-        // No existing session, initialize new one
         initializeSession()
       }
     } catch (error) {
-      // If no session exists, start new one
       initializeSession()
     }
   }
@@ -65,17 +59,19 @@ export default function FounderDiscoveryPage() {
   const initializeSession = async () => {
     const openingMessage = {
       role: 'assistant',
-      content: `Welcome to your Impact Story Discovery! 🎯
+      content: `Welcome to your Story Discovery Session! 🎯
 
-I'm here to help you clarify the story behind your venture and understand the deep "why" that drives your mission. This usually takes about 15-20 minutes.
+I'm here to help you uncover and articulate the powerful story behind your startup. This is the foundation of every great pitch.
 
-Most founders can explain *what* they do, but the most compelling pitches come from understanding *why* it matters to you personally and *why now* is the critical moment.
+At SlydS, we've helped 500+ founders raise over $2B - and the secret is always the same: **investors invest in stories, not just spreadsheets.**
+
+Most founders can explain *what* they do. But the pitches that close deals explain *why* it matters and *why you* are the one to solve it.
 
 Let's start with something personal:
 
 **What problem are you solving, and why does it keep you up at night?**
 
-Tell me the story of the moment you realized this problem needed to exist in the world.`
+Tell me the moment you realized this problem HAD to be solved.`
     }
     setMessages([openingMessage])
   }
@@ -139,10 +135,10 @@ Tell me the story of the moment you realized this problem needed to exist in the
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <Card className="shadow-lg">
-          <CardHeader className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-t-lg">
-            <CardTitle className="text-2xl">Impact Story Discovery</CardTitle>
+          <CardHeader className="bg-gradient-to-r from-primary to-purple-700 text-white rounded-t-lg">
+            <CardTitle className="text-2xl">Story Discovery Session</CardTitle>
             <p className="text-sm text-purple-100">
-              Clarify your founding story and impact thesis
+              Uncover the compelling narrative behind your startup
             </p>
           </CardHeader>
           <CardContent className="pt-6">
@@ -171,7 +167,7 @@ Tell me the story of the moment you realized this problem needed to exist in the
               </div>
               <div className="mt-2 w-full bg-purple-200 rounded-full h-2">
                 <div
-                  className="bg-purple-600 rounded-full h-2 transition-all"
+                  className="bg-primary rounded-full h-2 transition-all"
                   style={{
                     width: `${Math.min(100, (messages.filter(m => m.role === 'user').length / 8) * 100)}%`
                   }}
@@ -189,7 +185,7 @@ Tell me the story of the moment you realized this problem needed to exist in the
                   <div
                     className={`max-w-[85%] rounded-lg p-4 ${
                       msg.role === 'user'
-                        ? 'bg-purple-600 text-white'
+                        ? 'bg-primary text-white'
                         : 'bg-gray-100 text-gray-900'
                     }`}
                   >
@@ -200,7 +196,7 @@ Tell me the story of the moment you realized this problem needed to exist in the
               {loading && (
                 <div className="flex justify-start">
                   <div className="bg-gray-100 rounded-lg p-4">
-                    <Loader2 className="w-5 h-5 animate-spin text-purple-600" />
+                    <Loader2 className="w-5 h-5 animate-spin text-primary" />
                   </div>
                 </div>
               )}
@@ -213,11 +209,11 @@ Tell me the story of the moment you realized this problem needed to exist in the
                   <CheckCircle className="w-8 h-8 text-green-600 flex-shrink-0 mt-1" />
                   <div className="flex-1">
                     <h3 className="font-bold text-lg text-green-900 mb-2">
-                      Discovery Complete! 🎉
+                      Story Discovery Complete! 🎉
                     </h3>
                     <p className="text-sm text-green-800 mb-4">
-                      Great work! You've clarified your impact story and founding motivation.
-                      This foundation will make your pitch materials much more compelling.
+                      Great work! You've uncovered the narrative that will make investors lean in.
+                      Now let's put it into action with your pitch deck.
                     </p>
                     <div className="flex gap-3">
                       <Button
@@ -260,7 +256,7 @@ Tell me the story of the moment you realized this problem needed to exist in the
                   onClick={sendMessage}
                   disabled={loading || !input.trim()}
                   size="icon"
-                  className="h-auto bg-purple-600 hover:bg-purple-700"
+                  className="h-auto bg-primary hover:bg-primary/90"
                 >
                   <Send className="w-5 h-5" />
                 </Button>
@@ -270,24 +266,24 @@ Tell me the story of the moment you realized this problem needed to exist in the
             {/* Helper Text */}
             {!isComplete && (
               <p className="text-xs text-muted-foreground mt-3 text-center">
-                💡 Tip: The more authentic and specific you are, the better your final pitch will be
+                💡 Tip: The more authentic and specific you are, the more compelling your pitch will be
               </p>
             )}
           </CardContent>
         </Card>
 
         {/* Context Card */}
-        <Card className="mt-6 bg-blue-50 border-blue-200">
+        <Card className="mt-6 bg-amber-50 border-amber-200">
           <CardContent className="p-4">
-            <h4 className="font-semibold text-sm text-blue-900 mb-2">
-              What We'll Explore Together:
+            <h4 className="font-semibold text-sm text-amber-900 mb-2">
+              What We'll Uncover Together:
             </h4>
-            <ul className="text-xs text-blue-800 space-y-1">
+            <ul className="text-xs text-amber-800 space-y-1">
               <li>• Your personal connection to the problem</li>
-              <li>• The specific impact you want to create (SDG alignment)</li>
-              <li>• Why your solution is uniquely positioned to work</li>
+              <li>• The "aha moment" that started your journey</li>
+              <li>• Why your solution is uniquely positioned to win</li>
               <li>• The story of how your team came together</li>
-              <li>• Your vision for success and measurement</li>
+              <li>• Your vision that gets investors excited</li>
             </ul>
           </CardContent>
         </Card>

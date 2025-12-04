@@ -52,7 +52,7 @@ export function useAuth(options: AuthOptions = {}) {
         if (role !== requiredRole && role !== 'superadmin') {
           // Redirect to appropriate dashboard
           if (role === 'investor') {
-            router.push('/investor/dashboard');
+            router.push('/slyds/dashboard');
           } else {
             router.push('/founder/dashboard');
           }

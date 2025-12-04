@@ -86,7 +86,7 @@ This allows calculation of "blended returns" = Financial Returns + Impact Return
     const modeConfig = COACHING_MODES[mode];
     systemPrompt += `\n\n**Your Current Role:**\n${modeConfig.systemPromptModifier}`;
     
-    // Add persona-specific behavior for investor simulation
+    // Add persona-specific behavior for slyds simulation
     if (mode === 'investor_sim' && persona) {
       systemPrompt += `\n\n${buildInvestorSimPrompt(persona, projectData)}`;
     }

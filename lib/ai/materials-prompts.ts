@@ -231,7 +231,7 @@ Walk me through: If a customer pays you $X, what does it cost you to deliver? Ho
 **${category}:** ${oldScore} → ${newScore} (+${improvement})
 
 ${improvement >= 20 ? "That's a massive jump! Your revisions really landed." :
-  improvement >= 10 ? "Strong improvement. This is much more investor-ready now." :
+  improvement >= 10 ? "Strong improvement. This is much more slyds-ready now." :
   "Good progress. Let's push this even higher."}
 
 Let me review what you changed...

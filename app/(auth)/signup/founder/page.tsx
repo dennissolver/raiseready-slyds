@@ -37,28 +37,35 @@ export default function FounderSignupPage() {
   }, [router, supabase])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-violet-100">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
-        <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="text-sm text-blue-900">
-            <strong>For Impact Founders:</strong> Get AI coaching on your social impact pitch. Refine your theory of change and connect with mission-aligned investors. FREE to use!
+        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+          <p className="text-sm text-amber-900">
+            <strong>Submit Your Pitch to SlydS:</strong> Get AI-powered coaching to transform your pitch into a compelling story. From the team that has helped 500+ startups raise $2B+.
           </p>
         </div>
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Create Founder Account</h1>
-          <p className="text-muted-foreground">Start improving your impact pitch today</p>
+          <h1 className="text-3xl font-bold mb-2">Create Your Account</h1>
+          <p className="text-muted-foreground">Start perfecting your pitch today</p>
         </div>
         <Auth
           supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
+          appearance={{
+            theme: ThemeSupa,
+            variables: {
+              default: {
+                colors: {
+                  brand: 'hsl(262, 83%, 58%)',
+                  brandAccent: 'hsl(262, 83%, 45%)',
+                }
+              }
+            }
+          }}
           view="sign_up"
           providers={[]}
         />
         <div className="mt-6 text-center text-sm text-muted-foreground">
           Already have an account? <a href="/login" className="text-primary hover:underline">Sign in</a>
-        </div>
-        <div className="mt-4 text-center text-sm text-muted-foreground">
-          Are you an impact investor? <a href="/signup/investor" className="text-primary hover:underline">Sign up here</a>
         </div>
       </div>
     </div>

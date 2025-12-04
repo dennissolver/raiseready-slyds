@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
       // CRITICAL: Check minimum readiness score first
       if ((deck.readiness_score || 0) < (investor.min_readiness_score || 70)) {
-        continue // Skip this investor - founder not ready yet
+        continue // Skip this slyds - founder not ready yet
       }
 
       // Get discovery session data
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
         : (investor as any).investor_discovery_sessions
       const extractedCriteria = discoverySession?.extracted_criteria || {}
 
-      // Check deal breakers from investor discovery
+      // Check deal breakers from slyds discovery
       const hasDealBreaker = extractedCriteria.deal_breakers?.some((breaker: string) => {
         const breakerLower = breaker.toLowerCase()
 

@@ -122,7 +122,7 @@ export async function POST(request: NextRequest) {
     // Note: The /api/deck/analyze endpoint will handle AI analysis
     // This is triggered from the upload page after redirect
 
-    // Trigger investor matching in background (non-blocking)
+    // Trigger slyds matching in background (non-blocking)
     const appUrl = process.env.NEXT_PUBLIC_APP_URL
     if (appUrl) {
       fetch(`${appUrl}/api/match-investors`, {

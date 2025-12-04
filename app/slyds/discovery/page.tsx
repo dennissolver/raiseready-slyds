@@ -8,30 +8,18 @@ import { Textarea } from '@/components/ui/textarea'
 import { Send, Loader2 } from 'lucide-react'
 import { useAuth } from '@/hooks/use-auth';
 
-
-export default function InvestorDiscoveryPage() {
+export default function SlydsDiscoveryPage() {
   const router = useRouter()
   const supabase = createClient()
   const [messages, setMessages] = useState<Array<{role: string, content: string}>>([])
-  const { isLoading: authLoading, user } = useAuth({
-    requireAuth: true,
-    requiredRole: 'investor',
-  });
-
-  if (authLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p>Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [sessionId, setSessionId] = useState<string | null>(null)
+
+  const { isLoading: authLoading, user } = useAuth({
+    requireAuth: true,
+    requiredRole: 'slyds_admin',
+  });
 
   useEffect(() => {
     const init = async () => {
@@ -42,7 +30,13 @@ export default function InvestorDiscoveryPage() {
 
       const openingMessage = {
         role: 'assistant',
-        content: "Welcome! I'm your AI investment coach. I help you clarify your investment thesis so we can match you with the right founders.\n\nMost investors think they know what they want, but when we dig deeper, we discover what really matters. This usually takes about 15 minutes.\n\nLet's start: **What's a recent investment you passed on that you now regret?** Tell me about that company and why you said no."
+        content: `Welcome to SlydS Thesis Discovery! 🎯
+
+I'm here to help you define and refine your investment criteria so we can better match incoming founder pitches to what you're looking for.
+
+Since SlydS has helped 500+ startups raise $2B+, you've seen a lot of pitches. Let's capture that knowledge.
+
+**What's a recent pitch you passed on that you now regret?** Tell me about that founder and why you said no at the time.`
       }
       setMessages([openingMessage])
     }
@@ -82,7 +76,7 @@ export default function InvestorDiscoveryPage() {
 
       if (data.completed) {
         setTimeout(() => {
-          router.push('/investor/dashboard?discovery=complete')
+          router.push('/slyds/dashboard?discovery=complete')
         }, 2000)
       }
     } catch (error) {
@@ -92,17 +86,28 @@ export default function InvestorDiscoveryPage() {
     }
   }
 
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <Card>
-          <CardHeader>
-            <CardTitle>Investment Thesis Discovery</CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Let's understand what makes the perfect founder for you
+          <CardHeader className="bg-gradient-to-r from-primary to-purple-700 text-white rounded-t-lg">
+            <CardTitle>SlydS Thesis Discovery</CardTitle>
+            <p className="text-sm text-purple-100">
+              Define your criteria for evaluating incoming pitches
             </p>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="space-y-4 mb-6 max-h-[500px] overflow-y-auto">
               {messages.map((msg, idx) => (
                 <div

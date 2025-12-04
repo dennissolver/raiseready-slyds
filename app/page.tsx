@@ -135,7 +135,7 @@ export default function Home() {
               { icon: Sparkles, text: 'Storytelling analysis - transform data into compelling narratives' },
               { icon: Award, text: 'Investor-readiness score across key pitch areas' },
               { icon: MessageSquare, text: 'Interactive AI coach for pitch practice' },
-              { icon: Users, text: 'Simulated investor Q&A sessions' },
+              { icon: Users, text: 'Simulated slyds Q&A sessions' },
               { icon: TrendingUp, text: 'Track your progress and improvement' },
               { icon: CheckCircle, text: 'Unlimited practice until you\'re confident' },
             ].map((feature, i) => (

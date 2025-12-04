@@ -244,7 +244,7 @@ export async function compareDeckVersions(
 
   // Check readiness level change
   const getReadinessLevel = (score: number) => {
-    if (score >= 85) return 'investor-ready'
+    if (score >= 85) return 'slyds-ready'
     if (score >= 70) return 'ready'
     if (score >= 50) return 'needs-work'
     return 'not-ready'

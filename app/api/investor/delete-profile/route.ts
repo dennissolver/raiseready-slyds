@@ -1,4 +1,4 @@
-// app/api/investor/delete-profile/route.ts
+// app/api/slyds/delete-profile/route.ts
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 
@@ -15,7 +15,7 @@ export async function DELETE(request: Request) {
       )
     }
 
-    // Verify user is an investor
+    // Verify user is an slyds
     const { data: investorCheck } = await supabase
       .from('founders')
       .select('user_role')
@@ -29,7 +29,7 @@ export async function DELETE(request: Request) {
       )
     }
 
-    // Delete investor profile (CASCADE will handle related data)
+    // Delete slyds profile (CASCADE will handle related data)
     const { error: deleteError } = await supabase
       .from('founders')
       .delete()
@@ -37,7 +37,7 @@ export async function DELETE(request: Request) {
       .eq('user_role', 'investor')
 
     if (deleteError) {
-      console.error('Error deleting investor profile:', deleteError)
+      console.error('Error deleting slyds profile:', deleteError)
       return NextResponse.json(
         { error: 'Failed to delete profile', details: deleteError.message },
         { status: 500 }
@@ -53,7 +53,7 @@ export async function DELETE(request: Request) {
     })
 
   } catch (error) {
-    console.error('Error in investor delete profile route:', error)
+    console.error('Error in slyds delete profile route:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
