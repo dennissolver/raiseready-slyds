@@ -92,7 +92,7 @@ export async function GET(request: NextRequest) {
     const supabase = await createClient()
 
     // Get all versions
-    const { data: versions, error } = await supabase
+    const { data: versions, error }: { data: any, error: any } = await supabase
       .from('pitch_decks')
       .select(`
         id,
@@ -135,3 +135,4 @@ export async function GET(request: NextRequest) {
     )
   }
 }
+

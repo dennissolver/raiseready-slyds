@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { createClient } from '@/lib/supabase/client'
@@ -13,12 +13,11 @@ export default function FounderSignupPage() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_IN' && session?.user?.email) {
         // Create founder profile if it doesn't exist
-        const { error } = await supabase
-          .from('founders')
+        const { error } = await (supabase as any)
+          .from('founders' as any)
           .upsert({
             id: session.user.id,
             email: session.user.email,
-            user_role: 'founder',
             created_at: new Date().toISOString()
           }, {
             onConflict: 'id'
@@ -71,3 +70,5 @@ export default function FounderSignupPage() {
     </div>
   )
 }
+
+

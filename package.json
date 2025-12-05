@@ -11,8 +11,7 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "supabase:gen-types": "supabase gen types typescript --project-id $SUPABASE_PROJECT_ID --schema public > types/database.ts",
-    "supabase:gen-types-env": "supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > types/database.ts",
-    "postinstall": "npm run supabase:gen-types || true"
+    "supabase:gen-types-env": "supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > types/database.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.0.6",
@@ -77,3 +76,5 @@
     "npm": ">=10.0.0"
   }
 }
+
+

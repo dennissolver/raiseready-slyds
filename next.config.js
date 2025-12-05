@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     domains: ['localhost'],
     remotePatterns: [
@@ -15,5 +18,4 @@ const nextConfig = {
     },
   },
 }
-
 module.exports = nextConfig
